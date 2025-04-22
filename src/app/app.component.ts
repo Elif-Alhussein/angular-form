@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -13,15 +16,14 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     DropdownModule,
     CheckboxModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  isParticipating: boolean = false;
+  contactForm: FormGroup;
   submitted = false;
-  selectedCode: string = '';
-  selectedCountry: string = '';
 
   codes = [
     { label: '+90', value: '+TR' },
@@ -30,6 +32,7 @@ export class AppComponent {
     { label: '+61', value: '+AS' },
     { label: '+81', value: '+JP' },
   ];
+
   countries = [
     { label: 'Turkey', value: 'Turkey' },
     { label: 'United States of America', value: 'USA' },
@@ -38,29 +41,54 @@ export class AppComponent {
     { label: 'Japan', value: 'Japan' },
   ];
 
-  onSubmit(form: any) {
-    this.submitted = true;
+  constructor(private fb: FormBuilder) {
+    this.contactForm = this.fb.group({
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50),
+        ],
+      ],
+      surname: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50),
+        ],
+      ],
+      email: ['', [Validators.required, Validators.email]],
+      repeatemail: ['', [Validators.required, Validators.email]],
+      code: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      country: ['', Validators.required],
+      city: ['', Validators.required],
+      address: ['', Validators.required],
+      zipcode: [
+        '',
+        [Validators.required, Validators.pattern('^[A-Za-z0-9\\s-]{3,10}$')],
+      ],
+      isParticipating: [false, Validators.requiredTrue],
+    });
+  }
 
-    if (
-      form.valid &&
-      this.selectedCode &&
-      this.selectedCountry &&
-      this.isParticipating !== null &&
-      this.isValidEmail(form.value.email) &&
-      this.isValidEmail(form.value.repeatemail) &&
-      form.value.email === form.value.repeatemail
-    ) {
-      console.log(
-        'Form is valid and submitted!',
-        form.value,
-        this.isParticipating
-      );
+  successMessage = '';
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.contactForm.valid) {
+      console.log('Form values:', this.contactForm.value);
+      this.successMessage = 'İşlem Başarıyla Yapıldı!';
+      this.contactForm.reset();
+      this.submitted = false;
+
+      setTimeout(() => {
+        this.successMessage = '';
+      }, 5000);
     } else {
       console.log('Form is invalid!');
     }
-  }
-  isValidEmail(email: string): boolean {
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailPattern.test(email);
   }
 }
