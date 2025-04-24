@@ -1,15 +1,18 @@
 <div class="max-w-4xl mx-auto p-6 m-30 border shadow-md bg-white">
   <h2 class="text-2xl font-semibold mb-6">Contact Information</h2>
-
   <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
     <!-- Name and surname -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
-        <label class="block font-medium mb-3">Name *</label>
+        <label class="block font-medium mb-3"
+          >Name <span class="text-red-500">*</span></label
+        >
         <input
+          pInputText
           type="text"
           formControlName="name"
-          class="w-full border px-3 py-2"
+          placeholder="Name"
+          class="w-full"
         />
         <small
           *ngIf="submitted && contactForm.controls['name'].invalid"
@@ -20,11 +23,15 @@
       </div>
 
       <div>
-        <label class="block font-medium mb-3">Surname *</label>
+        <label class="block font-medium mb-3"
+          >Surname <span class="text-red-500">*</span></label
+        >
         <input
+          pInputText
           type="text"
           formControlName="surname"
-          class="w-full border px-3 py-2"
+          placeholder="Surname"
+          class="w-full"
         />
         <small
           *ngIf="submitted && contactForm.controls['surname'].invalid"
@@ -38,11 +45,15 @@
     <!-- Email and Repeat Email -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
       <div>
-        <label class="block font-medium">Email *</label>
+        <label class="block font-medium mb-3"
+          >Email <span class="text-red-500">*</span></label
+        >
         <input
+          pInputText
           type="email"
           formControlName="email"
-          class="w-full border px-3 py-2"
+          placeholder="Email"
+          class="w-full"
         />
         <small
           *ngIf="submitted && contactForm.controls['email'].invalid"
@@ -52,11 +63,15 @@
         </small>
       </div>
       <div>
-        <label class="block font-medium">Repeat Email *</label>
+        <label class="block font-medium mb-3"
+          >Repeat Email <span class="text-red-500">*</span></label
+        >
         <input
+          pInputText
           type="email"
           formControlName="repeatemail"
-          class="w-full border px-3 py-2"
+          placeholder="Email"
+          class="w-full"
         />
         <small
           *ngIf="submitted && contactForm.controls['repeatemail'].invalid"
@@ -76,14 +91,16 @@
       </div>
     </div>
 
-    <!-- Country Code and Phone Number -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-      <div>
-        <label class="block font-medium">Country Code *</label>
+    <!-- Country Code, Phone Number, Country in one row -->
+    <div class="mt-4 flex items-center space-x-4">
+      <div class="w-1/5">
+        <label class="block font-medium mb-3"
+          >Country Code <span class="text-red-500">*</span></label
+        >
         <p-dropdown
           [options]="codes"
           formControlName="code"
-          placeholder="Select a country"
+          placeholder="Select a country code"
           class="w-full"
         ></p-dropdown>
         <small
@@ -94,13 +111,17 @@
         </small>
       </div>
 
-      <div>
-        <label class="block font-medium">Phone Number *</label>
+      <div class="w-2/5">
+        <label class="block font-medium mb-3"
+          >Phone Number <span class="text-red-500">*</span></label
+        >
         <input
+          pInputText
           type="text"
           formControlName="phone"
+          placeholder="Enter your phone number"
           maxlength="10"
-          class="w-full border px-3 py-2"
+          class="w-full"
         />
         <small
           *ngIf="submitted && contactForm.controls['phone'].invalid"
@@ -109,33 +130,38 @@
           Please enter a valid phone number.
         </small>
       </div>
-    </div>
 
-    <!-- Country -->
-    <div class="mt-4">
-      <label class="block font-medium">Country *</label>
-      <p-dropdown
-        [options]="countries"
-        formControlName="country"
-        placeholder="Select a country"
-        class="w-full"
-      ></p-dropdown>
-      <small
-        *ngIf="submitted && contactForm.controls['country'].invalid"
-        class="text-red-500"
-      >
-        Country is required.
-      </small>
+      <div class="w-3/5">
+        <label class="block font-medium mb-3"
+          >Country <span class="text-red-500">*</span></label
+        >
+        <p-dropdown
+          [options]="countries"
+          formControlName="country"
+          placeholder="Select a country"
+          class="w-full p-3"
+        ></p-dropdown>
+        <small
+          *ngIf="submitted && contactForm.controls['country'].invalid"
+          class="text-red-500"
+        >
+          Country is required.
+        </small>
+      </div>
     </div>
 
     <!-- City and Address -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
       <div>
-        <label class="block font-medium">City *</label>
+        <label class="block font-medium mb-3"
+          >City <span class="text-red-500">*</span></label
+        >
         <input
+          pInputText
           type="text"
           formControlName="city"
-          class="w-full border px-3 py-2"
+          placeholder="City"
+          class="w-full"
         />
         <small
           *ngIf="submitted && contactForm.controls['city'].invalid"
@@ -146,11 +172,15 @@
       </div>
 
       <div>
-        <label class="block font-medium">Address *</label>
+        <label class="block font-medium mb-3"
+          >Address <span class="text-red-500">*</span></label
+        >
         <input
+          pInputText
           type="text"
           formControlName="address"
-          class="w-full border px-3 py-2"
+          placeholder="Address"
+          class="w-full"
         />
         <small
           *ngIf="submitted && contactForm.controls['address'].invalid"
@@ -161,20 +191,38 @@
       </div>
     </div>
 
-    <!-- Zipcode -->
-    <div class="mt-4">
-      <label class="block font-medium">Zipcode *</label>
-      <input
-        type="text"
-        formControlName="zipcode"
-        class="w-full border px-3 py-2"
-      />
-      <small
-        *ngIf="submitted && contactForm.controls['zipcode'].invalid"
-        class="text-red-500"
-      >
-        Zipcode is required and must be a valid format.
-      </small>
+    <!-- Zipcode and Save Button in the same row -->
+    <div class="mt-4 flex items-center space-x-4">
+      <!-- Zipcode -->
+      <div class="w-1/2">
+        <label class="block font-medium mb-3"
+          >Zipcode <span class="text-red-500">*</span></label
+        >
+        <input
+          pInputText
+          type="text"
+          formControlName="zipcode"
+          placeholder="Zipcode"
+          class="w-full"
+        />
+        <small
+          *ngIf="submitted && contactForm.controls['zipcode'].invalid"
+          class="text-red-500"
+        >
+          Zipcode is required and must be a valid format.
+        </small>
+      </div>
+
+      <!-- Save Button -->
+      <div class="w-1/2">
+        <p-button
+          label="Save"
+          type="submit"
+          [styleClass]="
+            'bg-blue-500 text-white px-4 py-2 rounded border-none shadow-md'
+          "
+        ></p-button>
+      </div>
     </div>
 
     <!-- CheckBox -->
@@ -194,17 +242,6 @@
       >
         You must confirm your participation.
       </small>
-    </div>
-
-    <!-- Save Button -->
-    <div class="mt-8">
-      <p-button
-        label="Save"
-        type="submit"
-        [styleClass]="
-          'bg-blue-500 text-white px-4 py-2 rounded border-none shadow-md'
-        "
-      ></p-button>
     </div>
 
     <!-- Success Message -->

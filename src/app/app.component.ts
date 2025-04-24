@@ -6,6 +6,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+
 
 @Component({
   selector: 'app-root',
@@ -17,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     DropdownModule,
     CheckboxModule,
     ReactiveFormsModule,
+    InputTextModule,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],

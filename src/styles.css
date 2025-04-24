@@ -1,2 +1,11 @@
 @import "tailwindcss";
 @import "primeicons/primeicons.css";
+
+.p-inputtext {
+  padding: 1rem !important;
+  height: 4rem !important;
+}
+.p-dropdown {
+  padding: 0.7rem !important;
+  height: 4rem !important;
+}
