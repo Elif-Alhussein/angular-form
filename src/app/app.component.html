@@ -135,6 +135,9 @@
             placeholder="Enter phone number"
             maxlength="10"
             class="w-full"
+            pattern="^[0-9]{10}$"
+            inputmode="numeric"
+            (input)="onPhoneInput($event)"
           />
           <div class="h-5 mt-1">
             <small

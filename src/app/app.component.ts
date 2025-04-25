@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -93,5 +92,9 @@ export class AppComponent {
     } else {
       console.log('Form is invalid!');
     }
+  }
+  onPhoneInput(event: any) {
+    const value = event.target.value;
+    event.target.value = value.replace(/[^0-9]/g, '');
   }
 }
