@@ -414,7 +414,7 @@
           </div>
 
           <!-- Birth Date -->
-          <div>
+          <!-- <div>
             <label class="block mb-3"
               >Date of birth <span class="text-red-500">*</span></label
             >
@@ -425,6 +425,31 @@
               [showIcon]="true"
               class="w-full"
             ></p-datePicker>
+            <small
+              *ngIf="hasError(null, 'birthDate', 'required', i)"
+              class="text-red-500"
+              >Please enter a valid date (DD/MM/YYYY)</small
+            >
+          </div> -->
+
+          <!-- Birth Date -->
+          <div>
+            <label class="block mb-3"
+              >Date of birth <span class="text-red-500">*</span></label
+            >
+            <p-calendar
+              formControlName="birthDate"
+              [showIcon]="true"
+              dateFormat="dd/mm/yy"
+              [showButtonBar]="true"
+              [monthNavigator]="true"
+              [yearNavigator]="true"
+              yearRange="1900:2030"
+              inputId="birthDate"
+              styleClass="w-full"
+              [inputStyle]="{ height: '4rem', padding: '1rem', width: '100%' }"
+            >
+            </p-calendar>
             <small
               *ngIf="hasError(null, 'birthDate', 'required', i)"
               class="text-red-500"

@@ -17,7 +17,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DatePickerModule } from 'primeng/datepicker';
 import { MessageModule } from 'primeng/message';
-
+import { CalendarModule } from 'primeng/calendar';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -32,6 +32,7 @@ import { MessageModule } from 'primeng/message';
     RadioButtonModule,
     DatePickerModule,
     MessageModule,
+    CalendarModule,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
